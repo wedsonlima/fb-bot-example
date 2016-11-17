@@ -1,0 +1,17 @@
+require 'rubygems'
+require 'bundler'
+
+Bundler.require
+
+require './app.rb'
+
+# run the modular object based app.rb file that we included above
+run App.new
+
+# map "/" do
+#   run(Sinatra::Application)
+# end
+#
+# map "/bot" do
+#   run(Facebook::Messenger::Server)
+# end
