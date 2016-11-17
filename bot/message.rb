@@ -1,20 +1,8 @@
+require 'facebook/messenger'
+
 Bot.on :message do |message|
   case message.text
   when /hello/i
-    Bot.deliver(
-      recipient: message.sender,
-      message: {
-        text: 'Hello, human!',
-        quick_replies: [
-          {
-            content_type: 'text',
-            title: 'Hello, bot!',
-            payload: 'HELLO_BOT'
-          }
-        ]
-      }
-    )
-  when /henrique/i
     Bot.deliver(
       recipient: message.sender,
       message: {
@@ -22,27 +10,22 @@ Bot.on :message do |message|
           type: 'template',
           payload: {
             template_type: 'button',
-            text: 'Você acha que o Henrique é careca?',
+            text: 'Hello, human! Who is your favorite bot?',
             buttons: [
-              { type: 'postback', title: 'Sim', payload: 'HENRIQUE_EH_CARECA' },
-              { type: 'postback', title: 'Não, mas tá ficando', payload: 'HENRIQUE_TA_FICANDO_CARECA' },
-              { type: 'postback', title: 'Prefiro não comentar', payload: 'HENRIQUE_CARECA_SEM_COMENTARIOS' }
+              { type: 'postback', title: 'You are!', payload: 'HARMLESS' },
+              { type: 'postback', title: "I don't know!", payload: 'EXTERMINATE' }
             ]
           }
         }
       }
     )
+  when /girafales/i
+    Bot.deliver( recipient: message.sender, message: { text: 'Let me show you something' } )
+    Bot.deliver( recipient: message.sender, message: { text: 'https://www.girafales.com' } )
   else
     Bot.deliver(
       recipient: message.sender,
-      message: {
-        attachment: {
-          type: 'image',
-          payload: {
-            url: 'https://i.imgur.com/iMKrDQc.gif'
-          }
-        }
-      }
+      message: { text: "I can't help you. I'm calling a humam to talk to you. =)" }
     )
   end
 end
