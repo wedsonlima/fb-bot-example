@@ -3,15 +3,10 @@ require 'bundler'
 
 Bundler.require
 
-require './app.rb'
+require 'dotenv'
+Dotenv.load
 
-# run the modular object based app.rb file that we included above
-run App.new
+require 'facebook/messenger'
+require_relative 'bot'
 
-# map "/" do
-#   run(Sinatra::Application)
-# end
-#
-# map "/bot" do
-#   run(Facebook::Messenger::Server)
-# end
+run Facebook::Messenger::Server
