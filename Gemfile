@@ -6,7 +6,7 @@ gem 'sinatra'
 gem 'thin'
 gem 'slim'
 
-gem 'facebook-messenger', '~> 0.10.0'
+gem 'facebook-messenger' #, '~> 0.10.0'
 
 gem 'dotenv'
 gem 'nokogiri' # for html scraper

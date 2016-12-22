@@ -1,7 +1,7 @@
 require 'rubygems'
-require 'bundler'
 require 'sinatra/base'
 
+require 'bundler'
 Bundler.require
 
 require 'dotenv'
@@ -13,4 +13,3 @@ require 'facebook/messenger'
 require_relative 'bot'
 
 run Facebook::Messenger::Server
-run BotAdmin
