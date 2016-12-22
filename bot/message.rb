@@ -3,25 +3,37 @@ require 'facebook/messenger'
 include Facebook::Messenger
 
 Bot.on :message do |message|
-  case message.text
-  when /n(ã|a)o|nunca|jamais|pró?xima|depois/i
-    message.reply text: 'Nem queria mesmo.'
-  when /sim|yes|claro|talvez/i
-    message.reply text: 'Vlw mas tô ocupado. Fica pra próxima.'
-  else
-    message.reply text: 'Vou fingir que você não falou nada.'
-
-    message.reply attachment: {
-                    type: 'template',
-                    payload: {
-                      template_type: 'button',
-                      text: 'E ai? O que você quer fazer no RU hoje?',
-                      buttons: [
-                        { type: 'postback', title: 'Café da Manhã', payload: 'DESJEJUM' },
-                        { type: 'postback', title: "Almoçar", payload: 'ALMOCO' },
-                        { type: 'postback', title: "Jantar", payload: 'JANTAR' }
-                      ]
-                    }
-                  }
+  begin
+    case message.text
+    when '?' # faz nada
+    when /n(ã|a)o|nunca|jamais|pr(ó|o)xima|depois|nope/i
+      message.reply text: 'Nem queria mesmo.'
+    when /sim|yes|claro|talvez/i
+      message.reply text: 'Vlw mas tô ocupado. Fica pra próxima.'
+    when /fuder/i
+      message.reply text: 'Depois de você.'
+    when /a(i|í) dentr?o/i
+      message.reply text: 'Do teu.'
+    when /alm(o|u)(ç|c)(o|ar) (hoje|hj)/i, /alm(o|u)(ç|c)(o|ar) de (hoje|hj)/i
+      ContentReader.show_menu responder: message, week_day: Date.today, daytime: :almoco
+    when /alm(o|u)(ç|c)(o|ar) amanh(ã|a)/i, /alm(o|u)(ç|c)(o|ar) de amanh(ã|a)/i
+      ContentReader.show_menu responder: message, week_day: Date.today + 1, daytime: :almoco
+    when /jantar? (hoje|hj)/i, /jantar? de (hoje|hj)/i
+      ContentReader.show_menu responder: message, week_day: Date.today, daytime: :jantar
+    when /jantar? amanh(ã|a)/i, /jantar? de amanh(ã|a)/i
+      ContentReader.show_menu responder: message, week_day: Date.today + 1, daytime: :jantar
+    when /ontem?/i
+      message.reply text: 'Ontem já passou e não interessa mais.'
+    when /hoje/i
+      message.reply attachment: ContentReader.menu_options(text: 'Hoje pra qual horário?')
+    when /amanhã?/i
+      message.reply attachment: ContentReader.menu_options(text: 'Amanhã pra qual horário?', week_day: :tomorrow)
+    else
+      message.reply text: 'Vou fingir que você não falou nada.'
+      message.reply attachment: ContentReader.menu_options(text: 'Quer ir no RU hoje pra fazer o que?')
+    end
+  rescue => e
+    message.reply text: 'Deu curto-circuito aqui.'
+    message.reply text: e.message
   end
 end

@@ -12,7 +12,7 @@ class ContentReader
     Nokogiri::HTML(open(full_url, 'User-Agent' => user_agent).read, nil, 'UTF-8')
   end
 
-  def self.menu(week_day: Date.today, horario: :almoco)
+  def self.menu(week_day: Date.today, daytime: :almoco)
     page = nokogiri_page "http://www.ufc.br/restaurante/cardapio/1-restaurante-universitario-de-fortaleza/#{week_day.to_s}"
 
     # linhas da tabela
@@ -37,6 +37,45 @@ class ContentReader
                 }
     end
 
-    options[horario]
+    options[daytime]
+  end
+
+  def self.show_menu(responder:, week_day:, daytime:)
+    begin
+      responder.reply text: 'Olhando aqui o site. Peraí!'
+
+      page_content = ContentReader.menu(week_day: week_day, daytime: daytime)
+
+      if page_content.any? && page_content.first[:options].any?
+        page_content.each do |r|
+          responder.reply text: "Em #{r[:name]} tem: #{r[:options].join(', ')}"
+        end
+        response_text = 'Posso ir contigo? =D'
+      else
+        response_text = "Tem nada no site. O #{payload.first} vai ter que ser feito em outro lugar. =("
+      end
+
+      responder.reply text: response_text
+    rescue => e
+      responder.reply text: 'Não consegui ver o que tem pra comer. =/'
+      responder.reply text: 'Acho que vamos ficar com fome. T-T'
+      # responder.reply text: "O erro foi esse:"
+      # responder.reply text: e.message
+    end
+  end
+
+  def self.menu_options(week_day: :today, text: 'Fala que eu te escuto.')
+    {
+      type: 'template',
+      payload: {
+        template_type: 'button',
+        text: text,
+        buttons: [
+          { type: 'postback', title: 'Café da Manhã', payload: week_day == :today ? 'DESJEJUM' : 'DESJEJUM_TOMORROW' },
+          { type: 'postback', title: "Almoço", payload: week_day == :today ? 'ALMOCO' : 'ALMOCO_TOMORROW' },
+          { type: 'postback', title: "Janta", payload: week_day == :today ? 'JANTAR' : 'JANTAR_TOMORROW' }
+        ]
+      }
+    }
   end
 end
