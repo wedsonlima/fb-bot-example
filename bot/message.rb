@@ -29,14 +29,14 @@ Bot.on :message do |message|
     when /jantar? amanh(ã|a)/i, /jantar? de amanh(ã|a)/i
       ContentReader.show_menu responder: message, week_day: Date.today + 1, daytime: :jantar
     when /ontem?/i
-      message.reply text: 'Ontem já passou e não interessa mais.'
+      message.reply text: 'Lembro não, oh. Talez eu saiba pra hoje ou pra amanhã.'
     when /hoje/i
       message.reply attachment: ContentReader.menu_options(text: 'Hoje pra qual horário?')
     when /amanhã?/i
       message.reply attachment: ContentReader.menu_options(text: 'Amanhã pra qual horário?', week_day: :tomorrow)
     else
-      message.reply text: 'Vou fingir que você não falou nada.'
-      message.reply attachment: ContentReader.menu_options(text: 'Quer ir no RU hoje pra fazer o que?')
+      message.reply text: 'Calma, Humano. Sou apenas um bot de 1a geração e não entendo tudo que você diz.'
+      message.reply attachment: ContentReader.menu_options(text: 'Quer ir no RU hoje pra fazer o que? (É só clicar)')
     end
   rescue => e
     message.reply text: 'Deu curto-circuito aqui.'
