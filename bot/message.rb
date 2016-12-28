@@ -6,6 +6,9 @@ Bot.on :message do |message|
   begin
     case message.text
     when '?' # faz nada
+    when /valore?s?|pre(c|ç)os?/i
+      message.reply text: 'R$ 1,10 para alunos.'
+      message.reply text: 'R$ 7,00 para professores, funcionários e visitantes.'
     when /n(ã|a)o|nunca|jamais|pr(ó|o)xima|depois|nope/i
       message.reply text: 'Nem queria mesmo.'
     when /sim|yes|claro|talvez/i
