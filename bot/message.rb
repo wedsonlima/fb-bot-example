@@ -6,9 +6,9 @@ Bot.on :message do |message|
   begin
     case message.text
     when '?' # faz nada
-    when /vlw|valeu|obrigado|show/i
+    when /vlw|valeu|obrigado|obg|show|thanks/i
       message.reply text: ';-)'
-    when /valore?s?|pre(c|ç)os?/i
+    when /quanto|valore?s?|pre(c|ç)os?/i
       message.reply text: 'R$ 1,10 para alunos.'
       message.reply text: 'R$ 7,00 para professores, funcionários e visitantes.'
       message.reply text: 'Só não sei se vale a pena. ;-)'
