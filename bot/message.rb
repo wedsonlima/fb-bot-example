@@ -12,11 +12,20 @@ Bot.on :message do |message|
       message.reply text: 'Do teu.'
     when /eu sou (seu|sua) (pai|mãe)/i
       message.reply text: 'Naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoooo...'
-    when /quem (é|eh) (seu|sua|teu|tua) (pai|mãe)/i
+    when /quem (é|eh) (seu|sua|teu|tua) (pai|mãe)/i, /quem (é|eh) (o|a) (seu|sua|teu|tua) (pai|mãe)/i
       message.reply text: 'É você =D'
     when /biscoito ou bolacha/i, /bolacha ou biscoito/i
-      message.reply buttons: { type: 'web_url', title: 'Eh bolacha', url: 'https://www.buzzfeed.com/clarissapassos/o-certo-eh-bolacha', webview_height_ratio: 'compact' }
-      # message.reply text: 'https://www.buzzfeed.com/clarissapassos/o-certo-eh-bolacha'
+      message.reply attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'button',
+          text: 'Vamos ver o que os especialistas dizem:',
+          buttons: [
+            { type: 'web_url', title: 'É biscoito', url: 'http://mundoestranho.abril.com.br/alimentacao/o-certo-e-biscoito-ou-bolacha/' },
+            { type: 'web_url', title: 'É bolacha', url: 'https://www.buzzfeed.com/clarissapassos/o-certo-eh-bolacha' }
+          ]
+        }
+      }
     when /n(ã|a)o|nunca|jamais|pr(ó|o)xima|depois|nope/i
       message.reply text: 'Nem queria mesmo.'
     when /sim|yes|claro|talvez/i
