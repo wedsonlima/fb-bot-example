@@ -15,7 +15,7 @@ Bot.on :message do |message|
     when /quem (é|eh) (seu|sua|teu|tua) (pai|mãe)/i
       message.reply text: 'É você =D'
     when /biscoito ou bolacha/i, /bolacha ou biscoito/i
-      message.reply attachment: { type: 'web_url', title: 'Eh bolacha', url: 'https://www.buzzfeed.com/clarissapassos/o-certo-eh-bolacha' }
+      message.reply buttons: { type: 'web_url', title: 'Eh bolacha', url: 'https://www.buzzfeed.com/clarissapassos/o-certo-eh-bolacha', webview_height_ratio: 'compact' }
       # message.reply text: 'https://www.buzzfeed.com/clarissapassos/o-certo-eh-bolacha'
     when /n(ã|a)o|nunca|jamais|pr(ó|o)xima|depois|nope/i
       message.reply text: 'Nem queria mesmo.'
