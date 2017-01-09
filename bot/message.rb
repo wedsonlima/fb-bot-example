@@ -10,16 +10,21 @@ Bot.on :message do |message|
       message.reply text: 'Depois de você.'
     when /a(i|í) dentr?o/i
       message.reply text: 'Do teu.'
-    when /quem (é|eh) (seu|sua) (pai|mãe)/i
+    when /eu sou (seu|sua) (pai|mãe)/i
+      message.reply text: 'Naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoooo...'
+    when /quem (é|eh) (seu|sua|teu|tua) (pai|mãe)/i
       message.reply text: 'Acho que vou precisar de um exame de DNA pra isso.'
     when /biscoito ou bolacha/i, /bolacha ou biscoito/i
-      message.reply text: 'https://www.buzzfeed.com/clarissapassos/o-certo-eh-bolacha'
+      message.reply type: 'web_url', title: 'Eh bolacha', url: 'https://www.buzzfeed.com/clarissapassos/o-certo-eh-bolacha'
+      # message.reply text: 'https://www.buzzfeed.com/clarissapassos/o-certo-eh-bolacha'
     when /n(ã|a)o|nunca|jamais|pr(ó|o)xima|depois|nope/i
       message.reply text: 'Nem queria mesmo.'
     when /sim|yes|claro|talvez/i
       message.reply text: 'Vlw mas tô ocupado. Fica pra próxima.'
     when /feijoada/i
-      message.reply text: 'Acho que toda quarta tem.'
+      message.reply text: 'A feijoada é na quarta.'
+      message.reply text: 'A quinta é do caranguejo.'
+      message.reply text: 'E a segunda do papoco zenir.'
     when /vlw|valeu|obrigado|obg|show|blz|beleza|thanks/i
       message.reply text: ';-)'
     when /quanto|valore?s?|pre(c|ç)os?/i
