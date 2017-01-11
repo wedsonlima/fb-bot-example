@@ -6,6 +6,14 @@ Bot.on :message do |message|
   begin
     case message.text
     when '?' # faz nada
+    when /(oi)/i
+      message.reply text: 'Tenho dois... O.o'
+      message.reply text: 'Brincadeira... =P'
+      message.reply text: 'Posso saber os pratos do R.U de hoje. É só perguntar.'
+    when /(hello)/i
+      message.reply text: 'Hello from the other siiiiiiiiiiiidee!!!'
+    when /(ola|olah|olá)/i
+      message.reply text: 'Oi. Você pode me perguntar os pratos do R.U. e algumas outras coisas... ;-D'
     when /fuder/i
       message.reply text: 'Depois de você.'
     when /a(i|í) dentr?o/i
