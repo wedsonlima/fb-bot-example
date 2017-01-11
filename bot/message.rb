@@ -36,7 +36,7 @@ Bot.on :message do |message|
       }
     when /n(ã|a)o|nunca|jamais|pr(ó|o)xima|depois|nope/i
       message.reply text: 'Nem queria mesmo.'
-    when /sim|yes|claro|talvez/i
+    when /sim|yes|claro|talvez|pode|bora|vamos/i
       message.reply text: 'Vlw mas tô ocupado. Fica pra próxima.'
     when /feijoada/i
       message.reply text: 'A feijoada é na quarta.'
