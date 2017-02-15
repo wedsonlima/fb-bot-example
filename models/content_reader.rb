@@ -50,7 +50,13 @@ class ContentReader
         page_content.each do |r|
           responder.reply text: "Em #{r[:name]} tem: #{r[:options].join(', ')}"
         end
-        response_text = 'Posso ir contigo? =D'
+
+        response_text = case [1, 2, 3].sample
+                        when 1 then 'Posso ir contigo? =D'
+                        when 2 then 'Dizem que tá bom'
+                        when 3 then 'Acho que dá pra encarar'
+                        else;
+                        end
       else
         response_text = "Tem nada no site. O #{payload.first} vai ter que ser feito em outro lugar. =("
       end

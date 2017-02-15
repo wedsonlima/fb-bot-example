@@ -6,6 +6,10 @@ Bot.on :message do |message|
   begin
     case message.text
     when '?' # faz nada
+    when /eu te amo/i
+      message.reply text: 'eu sei <3'
+    when /i love you/i
+      message.reply text: 'I know <3'
     when /(oi)/i
       message.reply text: 'Tenho dois... O.o'
       message.reply text: 'Brincadeira... =P'
@@ -18,7 +22,7 @@ Bot.on :message do |message|
       message.reply text: 'Depois de você.'
     when /a(i|í) dentr?o/i
       message.reply text: 'Do teu.'
-    when /eu sou (seu|sua) (pai|mãe)/i
+    when /eu sou (seu|sua) (pai|mãe)/i, /eu sou (o|a) (seu|sua) (pai|mãe)/i
       message.reply text: 'Naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoooo...'
     when /quem (é|eh) (seu|sua|teu|tua) (pai|mãe)/i, /quem (é|eh) (o|a) (seu|sua|teu|tua) (pai|mãe)/i
       message.reply text: 'É você =D'
