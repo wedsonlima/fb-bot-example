@@ -58,7 +58,9 @@ Bot.on :message do |message|
       else
         message.reply text: 'me espera ali no dindin'
       end
-    when /porque?/i, /por que/i, /por quê/i
+    when /^vem comigo/i
+      message.reply text: 'me espera ali no dindin'
+    when /porque?/i, /por que/i, /por quê/i, /^pq/i
       message.reply text: 'Só Asimov sabe'
     when /feijoada/i
       message.reply text: 'A feijoada é na quarta.'
