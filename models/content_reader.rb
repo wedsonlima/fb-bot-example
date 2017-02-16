@@ -42,7 +42,12 @@ class ContentReader
 
   def self.show_menu(responder:, week_day:, daytime:)
     begin
-      responder.reply text: 'Olhando aqui o site. Peraí!'
+      if [true, false].sample
+        responder.reply text: 'Vou ali perguntar pra tia'
+        responder.reply text: 'é rapidim'
+      else
+        responder.reply text: 'Olhando aqui o site, peraí. Fala mais nada não.'
+      end
 
       page_content = ContentReader.menu(week_day: week_day, daytime: daytime)
 
@@ -51,10 +56,11 @@ class ContentReader
           responder.reply text: "Em #{r[:name]} tem: #{r[:options].join(', ')}"
         end
 
-        response_text = case [1, 2, 3].sample
+        response_text = case [1, 2, 3, 4].sample
                         when 1 then 'Posso ir contigo? =D'
                         when 2 then 'Dizem que tá bom'
                         when 3 then 'Acho que dá pra encarar'
+                        when 4 then 'Só o filé'
                         else;
                         end
       else
@@ -63,8 +69,8 @@ class ContentReader
 
       responder.reply text: response_text
     rescue => e
-      responder.reply text: 'Não consegui ver o que tem pra comer. =/'
-      responder.reply text: 'Acho que vamos ficar com fome. T-T'
+      responder.reply text: 'Não consegui ver o que tem pra comer =/'
+      responder.reply text: 'Acho que vamos ficar com fome T-T'
       # responder.reply text: "O erro foi esse:"
       # responder.reply text: e.message
     end

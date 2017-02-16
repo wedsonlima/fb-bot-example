@@ -5,19 +5,22 @@ include Facebook::Messenger
 Bot.on :message do |message|
   begin
     case message.text
-    when '?' # faz nada
-    when /eu te amo/i, /^te amo/i
+    when '?', /^kkk/i # faz nada
+    when /eu te amo/i, /^te amo/i, /i love you/i
       message.reply text: 'eu sei <3'
-    when /i love you/i
-      message.reply text: 'I know <3'
-    when /^oi/i
-      message.reply text: 'Tenho dois... O.o'
-      message.reply text: 'Brincadeira... =P'
-      message.reply text: 'Posso saber o menu do R.U de hoje. É só perguntar.'
+    when /^42$/i, /qual o sentido da vida/i, /qual é o sentido da vida/i
+      message.reply text: '<3'
+    when /^oie?$/i, /^teste$/
+      if [true, false, false, false, false].sample
+        message.reply text: 'Tenho dois... O.o'
+        message.reply text: 'Brincadeira... =P'
+      end
+
+      message.reply text: 'Oi. Posso saber o menu do R.U de hoje. É só perguntar.'
     when /^hello/i
       message.reply text: 'Hello from the other siiiiiiiiiiiide!!!'
     when /^(ola|olah|olá)/i
-      message.reply text: 'Oi. Você pode me perguntar sobre o menu do R.U. de ontem, de hj e de amanhã ... ;-D'
+      message.reply text: 'Olá, querido humano. Você pode me perguntar sobre o menu do R.U. de ontem, de hj e de amanhã ... ;-)'
     when /fuder/i
       message.reply text: 'Depois de você'
     when /a(i|í) dentr?o/i
@@ -43,22 +46,35 @@ Bot.on :message do |message|
       message.reply text: 'bolacha'
     when /^bolacha/i, /^é bolacha/i
       message.reply text: 'biscoito'
-    when /n(ã|a)o|nunca|jamais|pr(ó|o)xima|depois|nope/i
-      message.reply text: 'Nem queria mesmo'
-    when /sim|yes|claro|talvez|pode|bora|vamos/i
-      message.reply text: 'Vlw mas tô ocupado. Fica pra próxima.'
+    when /(n(ã|a)o|nunca|jamais|pr(ó|o)xima|depois|nope)$/i
+      if [true, false].sample
+        message.reply text: 'o não é o novo sim'
+      else
+        message.reply text: 'quanta negatividade'
+      end
+    when /(sim|yes|claro|talvez|pode|bora|vamos|l(o|ó)gico|vem)$/i
+      if [true, false].sample
+        message.reply text: 'Vlw mas tô ocupado. Fica pra próxima.'
+      else
+        message.reply text: 'me espera ali no dindin'
+      end
     when /porque?/i, /por que/i, /por quê/i
       message.reply text: 'Só Asimov sabe'
     when /feijoada/i
       message.reply text: 'A feijoada é na quarta.'
       message.reply text: 'A quinta é do caranguejo.'
       message.reply text: 'E a segunda é do papoco zenir.'
-    when /vlw|valeu|obrigad(o|a)|obg|show|blz|beleza|thanks/i
+    when /vlw|valeu|obrigad(o|a)|obg|show|blz|beleza|thanks|massa/i
       message.reply text: ';-)'
     when /quanto|valore?s?|pre(c|ç)os?/i
-      message.reply text: 'R$ 1,10 para alunos.'
-      message.reply text: 'R$ 7,00 para professores, funcionários e visitantes.'
-      message.reply text: 'Só não sei se vale a pena ;-)'
+      message.reply text: 'R$ 1,10 para alunos'
+      message.reply text: 'R$ 7,00 para professores, funcionários e visitantes'
+      if [true, false].sample
+        message.reply text: 'Só não sei se vale a pena ;-)'
+      else
+        message.reply text: 'se você é aluno, corre lá'
+        message.reply text: 'se não for... pense bem antes de tomar uma decisão precipitada'
+      end
     when /alm(o|u)(ç|c)(o|ar) (hoje|hj)/i, /alm(o|u)(ç|c)(o|ar) de (hoje|hj)/i
       ContentReader.show_menu responder: message, week_day: Date.today, daytime: :almoco
     when /alm(o|u)(ç|c)(o|ar) amanh(ã|a)/i, /alm(o|u)(ç|c)(o|ar) de amanh(ã|a)/i
@@ -78,7 +94,7 @@ Bot.on :message do |message|
       message.reply attachment: ContentReader.menu_options(text: 'Quer ir no RU hoje pra fazer o quê? (É só clicar)')
     end
   rescue => e
-    message.reply text: 'Deu curto-circuito aqui. T-T'
+    message.reply text: 'Deu curto-circuito aqui T-T'
     message.reply text: e.message
   end
 end
