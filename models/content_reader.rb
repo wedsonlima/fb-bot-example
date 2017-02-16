@@ -65,7 +65,7 @@ class ContentReader
       if page_content.any? && page_content.first[:options].any?
         page_content.each do |r|
           # responder.reply text: "Em #{r[:name]} tem: #{r[:options].join(', ')}"
-          options = [r[:options][0...-1].join(', '), r[:options].last].join(' e ')
+          options = [r[:options][0...-1].join(', '), r[:options].last].compact.reject{ |o| o.empty? }.join(' e ')
           responder.reply text: "Em #{r[:name]} tem #{options}"
         end
 

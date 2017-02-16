@@ -25,17 +25,17 @@ Bot.on :message do |message|
     when /^42$/i, /qual o sentido da vida/i, /qual é o sentido da vida/i
       message.reply text: '<3'
     when /^oie?/i, /^teste$/
-      if [true, false, false, false, false].sample
-        message.reply text: 'Tenho dois... O.o'
-        message.reply text: 'Brincadeira... =P'
-      end
+      # if [true, false, false, false, false].sample
+      #   message.reply text: 'Tenho dois... O.o'
+      #   message.reply text: 'Brincadeira... =P'
+      # end
 
       message.reply text: 'Oi. Posso saber o menu do R.U de hoje. É só perguntar.'
     when /^hello/i
       message.reply text: 'Hello from the other siiiiiiiiiiiide!!!'
-    when /^(ola|olah|olá)/i
+    when /^(ola|olah|olá)/i, /^(boa|bom|boa) (tarde|dia|noite)/i
       message.reply text: 'Olá, querido humano. Você pode me perguntar sobre o menu do R.U. de ontem, de hj e de amanhã ... ;-)'
-    when /fuder/i
+    when /(fuder|foder)$/i
       message.reply text: 'Depois de você'
     when /a(i|í) dentr?o/i
       message.reply text: 'Do teu'
@@ -66,7 +66,7 @@ Bot.on :message do |message|
       else
         message.reply text: 'quanta negatividade'
       end
-    when /(sim|yes|claro|talvez|pode|bora|bó|boh|vamos|l(o|ó)gico|vem)$/i, /^pode sim/i, /^claro que pode/i
+    when /^(sim|yes|claro|talvez|pode|bora|bó|boh|vamos|l(o|ó)gico|vem)$/i, /^pode sim/i, /^claro que pode/i
       if [true, false].sample
         message.reply text: 'Vlw mas tô ocupado. Fica pra próxima.'
       else
@@ -80,7 +80,7 @@ Bot.on :message do |message|
       message.reply text: 'A feijoada é na quarta.'
       message.reply text: 'A quinta é do caranguejo.'
       message.reply text: 'E a segunda é do papoco zenir.'
-    when /vlw|valeu|obrigad(o|a)|obg|show|blz|beleza|thanks|massa/i
+    when /^(vlw|valeu|obrigad(o|a)|brigad(o|a)|obg|show|blz|beleza|thanks|massa|top)/i
       message.reply text: ';-)'
     when /quanto|valore?s?|pre(c|ç)os?/i
       message.reply text: 'R$ 1,10 para alunos'
