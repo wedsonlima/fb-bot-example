@@ -26,15 +26,26 @@ class ContentReader
               }
 
     rows.map do |row|
+      # cada periodo tem uma tabela: Desjejum, Almoco, Jantar
+      # trata se o texto for "almoco"
       if (h3 = row.xpath("td/h3/text()").to_s.downcase.gsub('ç', 'c')) != ''
         key = h3.to_sym
         next
       end
 
+      options_key = []
+
+      row.xpath("td[position() > 1]/span").each_with_index do |opk, index|
+        with_restriction = opk.attributes['class'].value.include?('lactose') || opk.attributes['class'].value.include?('gluten')
+
+        options_key[index - 1] = "#{options_key[index - 1]} #{opk.xpath('text()').to_s.strip}" if with_restriction
+        options_key[index] = opk.xpath('text()').to_s unless with_restriction
+      end
+
       options[key] << {
-                  name: row.xpath("td[1]/span/text()").to_s,
-                  options: row.xpath("td[position() > 1]/span[not(contains(@class, 'lactose'))][not(contains(@class, 'gluten'))]/text()").map(&:to_s)
-                }
+                        name: row.xpath("td[1]/span/text()").to_s,
+                        options: options_key.compact
+                      }
     end
 
     options[daytime]
@@ -44,7 +55,7 @@ class ContentReader
     begin
       if [true, false].sample
         responder.reply text: 'Vou ali perguntar pra tia'
-        responder.reply text: 'é rapidim'
+        responder.reply text: 'é vuado'
       else
         responder.reply text: 'Olhando aqui o site, peraí. Fala mais nada não.'
       end
@@ -53,7 +64,9 @@ class ContentReader
 
       if page_content.any? && page_content.first[:options].any?
         page_content.each do |r|
-          responder.reply text: "Em #{r[:name]} tem: #{r[:options].join(', ')}"
+          # responder.reply text: "Em #{r[:name]} tem: #{r[:options].join(', ')}"
+          options = [r[:options][0...-1].join(', '), r[:options].last].join(' e ')
+          responder.reply text: "Em #{r[:name]} tem #{options}"
         end
 
         response_text = case [1, 2, 3, 4].sample

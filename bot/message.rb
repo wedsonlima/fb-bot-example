@@ -6,11 +6,25 @@ Bot.on :message do |message|
   begin
     case message.text
     when '?', /^kkk/i # faz nada
+    when /^rubotson$/i, /^ei,? rubotson/i
+      message.reply text: 'Diga, humano'
+    when /(vc|tu|você) me amas?/i
+      if [false, false].sample
+        message.reply text: 'claro que sim'
+      else
+        message.reply text: 'não sei... precisamos nos conhecer melhor'
+      end
     when /eu te amo/i, /^te amo/i, /i love you/i
-      message.reply text: 'eu sei <3'
+      case [1, 2, 3].sample
+      when 1 then message.reply text: 'eu sei <3'
+      when 2 then message.reply text: 'vem nimim'
+      else
+        message.reply text: 'obrigado'
+        message.reply text: 'queria poder dizer o mesmo (y)'
+      end
     when /^42$/i, /qual o sentido da vida/i, /qual é o sentido da vida/i
       message.reply text: '<3'
-    when /^oie?$/i, /^teste$/
+    when /^oie?/i, /^teste$/
       if [true, false, false, false, false].sample
         message.reply text: 'Tenho dois... O.o'
         message.reply text: 'Brincadeira... =P'
@@ -52,7 +66,7 @@ Bot.on :message do |message|
       else
         message.reply text: 'quanta negatividade'
       end
-    when /(sim|yes|claro|talvez|pode|bora|vamos|l(o|ó)gico|vem)$/i
+    when /(sim|yes|claro|talvez|pode|bora|bó|boh|vamos|l(o|ó)gico|vem)$/i, /^pode sim/i, /^claro que pode/i
       if [true, false].sample
         message.reply text: 'Vlw mas tô ocupado. Fica pra próxima.'
       else
