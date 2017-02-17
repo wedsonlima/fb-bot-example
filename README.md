@@ -57,7 +57,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
       "payload":"SAY_SOMETHING_NICE"
     }
   ]
-}' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAR84tYgUw8BAMoUYZCkaiuyuImLVODLRcSePeFixQrimkR5iBdJY7u9TPcJyDPfwcYD1xmG8YAUp4UKaUqjdsKgPzYZBmuGHYFENIe6CxmX7KU5xh17IeNI2wAzU0bWN709hb2tfzDgXUH5laT9zjvZAguETe4VBjJTBoMpwZDZD"
+}' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=PAGE_ACCESS_TOKEN"
 
 ## REMOVE
 
