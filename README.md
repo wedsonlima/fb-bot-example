@@ -49,11 +49,6 @@ curl -X POST -H "Content-Type: application/json" -d '{
   "call_to_actions":[
     {
       "type":"postback",
-      "title":"Café da manhã",
-      "payload":"DESJEJUM"
-    },
-    {
-      "type":"postback",
       "title":"Almoço",
       "payload":"ALMOCO"
     },
@@ -61,6 +56,11 @@ curl -X POST -H "Content-Type: application/json" -d '{
       "type":"postback",
       "title":"Jantar",
       "payload":"JANTAR"
+    },
+    {
+      "type":"postback",
+      "title":"Café da manhã",
+      "payload":"DESJEJUM"
     },
     {
       "type":"postback",
