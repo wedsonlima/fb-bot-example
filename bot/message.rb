@@ -5,7 +5,7 @@ include Facebook::Messenger
 Bot.on :message do |message|
   begin
     case message.text
-    when '?', /^kkk/i # faz nada
+    when '^^', '?', /^kkk/i, /^haha/i # faz nada
     when /^rubotson$/i, /^ei,? rubotson/i
       message.reply text: 'Diga, humano'
     when /(vc|tu|você) me amas?/i
@@ -19,21 +19,22 @@ Bot.on :message do |message|
       when 1 then message.reply text: 'eu sei <3'
       when 2 then message.reply text: 'vem nimim'
       else
-        message.reply text: 'obrigado'
-        message.reply text: 'queria poder dizer o mesmo (y)'
+        message.reply text: 'obrigado (y)'
+        message.reply text: 'queria poder dizer o mesmo'
       end
     when /^42$/i, /qual o sentido da vida/i, /qual é o sentido da vida/i
       message.reply text: '<3'
     when /^oie?/i, /^teste$/
-      # if [true, false, false, false, false].sample
-      #   message.reply text: 'Tenho dois... O.o'
-      #   message.reply text: 'Brincadeira... =P'
-      # end
-
-      message.reply text: 'Oi. Posso saber o menu do R.U de hoje. É só perguntar.'
-    when /^hello/i
+      message.reply text: 'Oi. Posso saber o menu do R.U de hoje. É só perguntar ou usar o menu aí embaixo.'
+    when /^(tu|vc|você) paga/i
+      if [true, false].sample
+        message.reply text: 'só se aceitarem bitcoins'
+      else
+        message.reply text: 'blz, mas vou esperar um agrado hoje à noite ;-)'
+      end
+    when /^hello/i, /^aff/i
       message.reply text: 'Hello from the other siiiiiiiiiiiide!!!'
-    when /^(ola|olah|olá)/i, /^(boa|bom|boa) (tarde|dia|noite)/i
+    when /^(ola|olah|olá|alo|alô)/i, /^(boa|bom|boa) (tarde|dia|noite)/i
       message.reply text: 'Olá, querido humano. Você pode me perguntar sobre o menu do R.U. de ontem, de hj e de amanhã ... ;-)'
     when /(fuder|foder)$/i
       message.reply text: 'Depois de você'
@@ -80,7 +81,7 @@ Bot.on :message do |message|
       message.reply text: 'A feijoada é na quarta.'
       message.reply text: 'A quinta é do caranguejo.'
       message.reply text: 'E a segunda é do papoco zenir.'
-    when /^(vlw|valeu|obrigad(o|a)|brigad(o|a)|obg|show|blz|beleza|thanks|massa|top)/i
+    when /^(vlw|valeu|obrigad(o|a)|brigad(o|a)|obg|show|blz|beleza|thanks|massa|top|opa)/i, /^muito obrigad(o|a)/i
       message.reply text: ';-)'
     when /quanto|valore?s?|pre(c|ç)os?/i
       message.reply text: 'R$ 1,10 para alunos'
@@ -101,7 +102,7 @@ Bot.on :message do |message|
       ContentReader.show_menu responder: message, week_day: Date.today + 1, daytime: :jantar
     when /ontem?/i
       message.reply text: 'Vixe, limparam meus logs... T-T'
-    when /hoje/i, /quais os pratos/i, /qual o? prato/i, /pratos/i, /menu/i
+    when /hoje/i, /quais os pratos/i, /qual o? prato/i, /pratos/i, /menu/i, /card(a|á)pio/i
       message.reply attachment: ContentReader.menu_options(text: 'Hoje pra qual horário?')
     when /amanhã?/i
       message.reply attachment: ContentReader.menu_options(text: 'Amanhã pra qual horário?', week_day: :tomorrow)

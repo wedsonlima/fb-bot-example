@@ -103,4 +103,22 @@ class ContentReader
       }
     }
   end
+
+  def self.say_something_nice(responder:)
+    responder.reply text: something_nice
+  end
+
+  private
+
+  def self.something_nice
+    [
+      "tonight is the night",
+      "to sem saco pra isso agora",
+      "vai fundo sem pensar nas consequências",
+      "consulta teu FTGS que você terá uma surpresa",
+      "tem sempre alguém que acha que você não é completamente inútil",
+      "aquele negócio que você queria fazer e não teve coragem... manda brasa que dá certo",
+      "se molhou na chuva? olha o lado postivo.. hoje você já tomou banho \\o/"
+    ].sample
+  end
 end

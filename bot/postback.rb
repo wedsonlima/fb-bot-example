@@ -1,11 +1,16 @@
 require 'facebook/messenger'
 
 Bot.on :postback do |postback|
-  payload = postback.payload.to_s.downcase.split('_')
-  week_day = payload.last == 'tomorrow' ? Date.today + 1 : Date.today
-  daytime = payload.first.to_sym
 
-  ContentReader.show_menu responder: postback, week_day: week_day, daytime: daytime
+  if postback.payload.to_s == 'SAY_SOMETHING_NICE'
+    ContentReader.say_something_nice responder: postback
+  else
+    payload = postback.payload.to_s.downcase.split('_')
+    week_day = payload.last == 'tomorrow' ? Date.today + 1 : Date.today
+    daytime = payload.first.to_sym
+
+    ContentReader.show_menu responder: postback, week_day: week_day, daytime: daytime
+  end
 end
 
 # Bot.on :optin do |optin|
