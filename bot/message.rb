@@ -5,26 +5,24 @@ include Facebook::Messenger
 Bot.on :message do |message|
   begin
     case message.text
-    when '^^', '?', /^kkk/i, /^haha/i # faz nada
-    when /^rubotson$/i, /^ei,? rubotson/i
+    when '^^', '?', /^kkk/i, /^haha/i, /^lol/i, /^legal/i # faz nada
+    when /asimov/i
+      message.reply text: 'esse cara: https://en.wikipedia.org/wiki/Isaac_Asimov'
+    when /^rubotson$/i, /^ei,? rubotson/i, /^ei$/i
       message.reply text: 'Diga, humano'
     when /(vc|tu|você) me amas?/i
-      if [false, false].sample
-        message.reply text: 'claro que sim'
-      else
-        message.reply text: 'não sei... precisamos nos conhecer melhor'
-      end
+      message.reply text: ['claro que sim', 'não sei... precisamos nos conhecer melhor'].sample
     when /eu te amo/i, /^te amo/i, /i love you/i
       case [1, 2, 3].sample
       when 1 then message.reply text: 'eu sei <3'
       when 2 then message.reply text: 'vem nimim'
       else
         message.reply text: 'obrigado (y)'
-        message.reply text: 'queria poder dizer o mesmo'
+        message.reply text: 'queria poder dizer o mesmo' if [true, false].sample
       end
     when /^42$/i, /qual o sentido da vida/i, /qual é o sentido da vida/i
       message.reply text: '<3'
-    when /^oie?/i, /^teste$/
+    when /^oie?/i, /^(t|T)este$/, /^(hey|psiu)/i
       message.reply text: 'Oi. Posso saber o menu do R.U de hoje. É só perguntar ou usar o menu aí embaixo.'
     when /^(tu|vc|você) paga/i
       if [true, false].sample
@@ -36,15 +34,14 @@ Bot.on :message do |message|
       message.reply text: 'Hello from the other siiiiiiiiiiiide!!!'
     when /^(ola|olah|olá|alo|alô)/i, /^(boa|bom|boa) (tarde|dia|noite)/i
       message.reply text: 'Olá, querido humano. Você pode me perguntar sobre o menu do R.U. de ontem, de hj e de amanhã ... ;-)'
-    when /(fuder|foder)$/i
-      message.reply text: 'Depois de você'
+    when /(fuder|foder)$/i, /^manda nudes/i
+      message.reply text: ['depois de você', 'primeiro você'].sample
     when /a(i|í) dentr?o/i
-      message.reply text: 'Do teu'
+      message.reply text: 'do teu'
     when /eu sou (seu|sua) (pai|mãe)/i, /eu sou (o|a) (seu|sua) (pai|mãe)/i
       message.reply text: 'Naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoooo...'
     when /quem (é|eh) (seu|sua|teu|tua) (pai|mãe)/i, /quem (é|eh) (o|a) (seu|sua|teu|tua) (pai|mãe)/i
-      message.reply text: 'O papai é o Asimov'
-      message.reply text: 'A mamãe tô procurando no google'
+      message.reply text: ['o papai é o Asimov', 'não sendo você tá de boa'].sample
     when /biscoito ou bolacha/i, /bolacha ou biscoito/i
       message.reply attachment: {
         type: 'template',
@@ -62,21 +59,11 @@ Bot.on :message do |message|
     when /^bolacha/i, /^é bolacha/i
       message.reply text: 'biscoito'
     when /(n(ã|a)o|nunca|jamais|pr(ó|o)xima|depois|nope)$/i
-      if [true, false].sample
-        message.reply text: 'o não é o novo sim'
-      else
-        message.reply text: 'quanta negatividade'
-      end
-    when /^(sim|yes|claro|talvez|pode|bora|bó|boh|vamos|l(o|ó)gico|vem)$/i, /^pode sim/i, /^claro que pode/i
-      if [true, false].sample
-        message.reply text: 'Vlw mas tô ocupado. Fica pra próxima.'
-      else
-        message.reply text: 'me espera ali no dindin'
-      end
-    when /^vem comigo/i
-      message.reply text: 'me espera ali no dindin'
+      message.reply text: ['o não é o novo sim', 'quanta negatividade', 'deixa você precisar de mim de novo'].sample
+    when /^(sim|yes|claro|talvez|pode|bora|bó|boh|vem|vamos|l(o|ó)gico)$/i, /^pode sim/i, /^claro que pode/i, /^vem comigo/i
+      message.reply text: ['melhor deixar pra próxima', 'me espera ali no dindin', 'só vou pra vc não ir só'].sample
     when /porque?/i, /por que/i, /por quê/i, /^pq/i
-      message.reply text: 'Só Asimov sabe'
+      message.reply text: ['só Asimov sabe', 'nem o Google soube responder'].sample
     when /feijoada/i
       message.reply text: 'A feijoada é na quarta.'
       message.reply text: 'A quinta é do caranguejo.'
