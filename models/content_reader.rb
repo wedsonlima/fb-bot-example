@@ -52,10 +52,21 @@ class ContentReader
   end
 
   def self.show_menu(responder:, week_day:, daytime:)
+    # ve se o carnaval ja passou
+    if Time.now < Time.parse("2017-03-01")
+      responder.reply text: 'meu fi... em pleno carnaval vc querendo saber se pode almoçar no RU?'
+      responder.reply text: 'vai arrumar uma companhia pra gastar essas camisinhas do governo que tu guardou com tanta esperança de usar.. ;-)'
+    else
+      responder.reply text: 'agora que o carnaval acabou e tá todo mundo liso... todo mundo voltando pro RU'
+      show_menu2 responder: responder, week_day: week_day, daytime: daytime
+    end
+  end
+
+  def self.show_menu2(responder:, week_day:, daytime:)
     begin
       if [true, false].sample
         responder.reply text: 'Vou ali perguntar pra tia'
-        responder.reply text: 'é vuado'
+        responder.reply text: ['é vuado', 'calma aí'].sample
       else
         responder.reply text: 'Olhando aqui o site, peraí. Fala mais nada não.'
       end
@@ -69,18 +80,19 @@ class ContentReader
           responder.reply text: "Em #{r[:name]} tem #{options}"
         end
 
-        response_text = case [1, 2, 3, 4].sample
+        response_text = case [1, 2, 3, 4, 5, 6].sample
                         when 1 then 'Posso ir contigo? =D'
                         when 2 then 'Dizem que tá bom'
                         when 3 then 'Acho que dá pra encarar'
                         when 4 then 'Só o filé'
+                        when 5 then 'Vai na fé'
                         else;
                         end
       else
         response_text = "Tem nada no site. O #{payload.first} vai ter que ser feito em outro lugar. =("
       end
 
-      responder.reply text: response_text
+      responder.reply(text: response_text) if response_text
     rescue => e
       responder.reply text: 'Não consegui ver o que tem pra comer =/'
       responder.reply text: 'Acho que vamos ficar com fome T-T'
@@ -112,13 +124,19 @@ class ContentReader
 
   def self.something_nice
     [
-      "tonight is the night",
-      "tô sem saco pra isso agora",
-      "vai fundo sem pensar nas consequências",
-      "consulta teu FTGS que você terá uma surpresa",
-      "tem sempre alguém que acha que você não é completamente inútil",
-      "aquele negócio que você queria fazer e não teve coragem... manda brasa que dá certo",
-      "se molhou na chuva? olha o lado positivo... hoje você já tomou banho \\o/"
+      "abri um biscoito da sorte e o papel dizia que ele tava vencido... =(",
+      # "tem sempre alguém que não te acha completamente inútil",
+      # "aquele negócio que você queria fazer e não teve coragem... manda brasa que dá certo",
+      # carnaval
+      "seja um humano esperto nesse carnaval... use uma máscara pra fugir das marcações do facebook",
+      "carnaval é a época pra você conhecer o maior amor da sua vida... ou a maior decepção",
+      "nesse carnaval é melhor acordar arrependido que dormir com a vontade",
+      "aproveita o carnaval pra colocar todos os seus projetos em dia... ou só toma uma cerveja e espera o resto do ano pegar fogo (y)",
+      "Seja confiante nesse carnaval. Você pode ser a decepção de alguém depois da ressaca",
+      "não liga se você é um humano feio, nesse carnaval vai tá todo mundo bêbado mesmo",
+      "se você vai ficar em casa nesse carnaval enquanto tá todo mundo se comendo no 'mei do mundo'... tamo junto",
+      "carnaval é a época pra você fazer tudo que não tinha coragem de fazer sóbrio e depois fingir que não lembra pq tava bêbedo"
+      # "se molhou na chuva? olha o lado positivo... hoje você já tomou banho \\o/"
     ].sample
   end
 end

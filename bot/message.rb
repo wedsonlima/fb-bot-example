@@ -35,7 +35,15 @@ Bot.on :message do |message|
     when /^(ola|olah|olá|alo|alô)/i, /^(boa|bom|boa) (tarde|dia|noite)/i
       message.reply text: 'Olá, querido humano. Você pode me perguntar sobre o menu do R.U. de ontem, de hj e de amanhã ... ;-)'
     when /(fuder|foder)$/i, /^manda nudes/i
-      message.reply text: ['depois de você', 'primeiro você'].sample
+      # message.reply text: ['depois de você', 'primeiro você'].sample
+
+      message.reply attachment: {
+                      type: 'image',
+                      payload: {
+                        url: 'http://www.mwctoys.com/images/review_htendo_3.jpg'
+                      }
+                    }
+
     when /a(i|í) dentr?o/i
       message.reply text: 'do teu'
     when /eu sou (seu|sua) (pai|mãe)/i, /eu sou (o|a) (seu|sua) (pai|mãe)/i
