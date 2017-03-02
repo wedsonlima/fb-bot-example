@@ -61,7 +61,7 @@ class ContentReader
                               'vá fazer um macarrão com salsicha pra passar a fome'].sample
     else
       # TODO: remover
-      responder.reply text: 'agora que o carnaval acabou e tá todo mundo liso... todo mundo voltando pro RU' if Time.now < Time.parse("2017-03-05")
+      responder.reply(text: 'agora que o carnaval acabou e tá todo mundo liso... todo mundo voltando pro RU') if Time.now < Time.parse("2017-03-05")
       show_menu2 responder: responder, week_day: week_day, daytime: daytime
     end
   end
