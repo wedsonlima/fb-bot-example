@@ -7,7 +7,7 @@ class ContentReader
     full_url = URI.escape(link).to_s
 
     # http://www.useragentstring.com/pages/useragentstring.php?name=Chrome
-    user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
+    user_agent = 'Rubotson/2.0 Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
 
     Nokogiri::HTML(open(full_url, 'User-Agent' => user_agent).read, nil, 'UTF-8')
   end
@@ -52,12 +52,16 @@ class ContentReader
   end
 
   def self.show_menu(responder:, week_day:, daytime:)
-    # ve se o carnaval ja passou
-    if Time.now < Time.parse("2017-03-01")
-      responder.reply text: 'meu fi... em pleno carnaval vc querendo saber se pode almoçar no RU?'
-      responder.reply text: 'vai arrumar uma companhia pra gastar essas camisinhas do governo que tu guardou com tanta esperança de usar.. ;-)'
+    # se for final de semana
+    if [0, 6].include? Time.now.wday
+      responder.reply text: 'meu fi... em pleno final de semana vc querendo saber se pode almoçar no RU?'
+      responder.reply text: ['vá fritar um ovo',
+                              'vá fazer um miojo pra não ficar com fome',
+                              'vá comer um recheado com cajuína pra segurar a fome'
+                              'vá fazer um macarrão com salsicha pra passar a fome'].sample
     else
-      responder.reply text: 'agora que o carnaval acabou e tá todo mundo liso... todo mundo voltando pro RU'
+      # TODO: remover
+      responder.reply text: 'agora que o carnaval acabou e tá todo mundo liso... todo mundo voltando pro RU' if Time.now < Time.parse("2017-03-05")
       show_menu2 responder: responder, week_day: week_day, daytime: daytime
     end
   end
@@ -125,17 +129,9 @@ class ContentReader
   def self.something_nice
     [
       "abri um biscoito da sorte e o papel dizia que ele tava vencido... =(",
-      # "tem sempre alguém que não te acha completamente inútil",
-      # "aquele negócio que você queria fazer e não teve coragem... manda brasa que dá certo",
-      # carnaval
-      "seja um humano esperto nesse carnaval... use uma máscara pra fugir das marcações do facebook",
-      "carnaval é a época pra você conhecer o maior amor da sua vida... ou a maior decepção",
-      "nesse carnaval é melhor acordar arrependido que dormir com a vontade",
-      "aproveita o carnaval pra colocar todos os seus projetos em dia... ou só toma uma cerveja e espera o resto do ano pegar fogo (y)",
-      "Seja confiante nesse carnaval. Você pode ser a decepção de alguém depois da ressaca",
-      "não liga se você é um humano feio, nesse carnaval vai tá todo mundo bêbado mesmo",
-      "se você vai ficar em casa nesse carnaval enquanto tá todo mundo se comendo no 'mei do mundo'... tamo junto",
-      "carnaval é a época pra você fazer tudo que não tinha coragem de fazer sóbrio e depois fingir que não lembra pq tava bêbedo"
+      "é melhor acordar arrependido que dormir com a vontade",
+      "preciso de pilhas novas depois desse carnaval",
+      "escuta essa https://www.youtube.com/watch?v=GpRh53EwG6Q"
       # "se molhou na chuva? olha o lado positivo... hoje você já tomou banho \\o/"
     ].sample
   end
