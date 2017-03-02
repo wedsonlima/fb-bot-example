@@ -57,7 +57,7 @@ class ContentReader
       responder.reply text: 'meu fi... em pleno final de semana vc querendo saber se pode almoçar no RU?'
       responder.reply text: ['vá fritar um ovo',
                               'vá fazer um miojo pra não ficar com fome',
-                              'vá comer um recheado com cajuína pra segurar a fome'
+                              'vá comer um recheado com cajuína pra segurar a fome',
                               'vá fazer um macarrão com salsicha pra passar a fome'].sample
     else
       # TODO: remover
