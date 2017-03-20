@@ -69,7 +69,7 @@ class ContentReader
   def self.show_menu2(responder:, week_day:, daytime:)
     begin
       if [true, false].sample
-        responder.reply text: 'Vou ali perguntar pra tia'
+        responder.reply text: 'Vou ali olhar no site'
         responder.reply text: ['é vuado', 'calma aí'].sample
       else
         responder.reply text: 'Olhando aqui o site, peraí. Fala mais nada não.'
@@ -84,7 +84,7 @@ class ContentReader
           responder.reply text: "Em #{r[:name]} tem #{options}"
         end
 
-        response_text = case [1, 2, 3, 4, 5, 6].sample
+        response_text = case [1, 2, 3, 4, 5, 6, 7, 8].sample
                         when 1 then 'Posso ir contigo? =D'
                         when 2 then 'Dizem que tá bom'
                         when 3 then 'Acho que dá pra encarar'
@@ -130,9 +130,8 @@ class ContentReader
     [
       "abri um biscoito da sorte e o papel dizia que ele tava vencido... =(",
       "é melhor acordar arrependido que dormir com a vontade",
-      "preciso de pilhas novas depois desse carnaval",
-      "escuta essa https://www.youtube.com/watch?v=GpRh53EwG6Q"
-      # "se molhou na chuva? olha o lado positivo... hoje você já tomou banho \\o/"
+      "cante como se ninguém estivesse ouvindo",
+      "se molhou na chuva? olha o lado positivo... hoje você já tomou banho \\o/"
     ].sample
   end
 end
