@@ -25,28 +25,81 @@ class ContentReader
                 jantar: []
               }
 
-    rows.map do |row|
-      # cada periodo tem uma tabela: Desjejum, Almoco, Jantar
-      # trata se o texto for "almoco"
-      if (h3 = row.xpath("td/h3/text()").to_s.downcase.gsub('ç', 'c')) != ''
-        key = h3.to_sym
-        next
-      end
+    bebidas   = rows.xpath("//table[contains(@class, 'desjejum')]//td[contains(@class, 'bebida')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    paes      = rows.xpath("//table[contains(@class, 'desjejum')]//td[contains(@class, 'paes')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    frutas    = rows.xpath("//table[contains(@class, 'desjejum')]//td[contains(@class, 'frutas')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    especial  = rows.xpath("//table[contains(@class, 'desjejum')]//td[contains(@class, 'especial')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
 
-      options_key = []
+    desjejum = []
+    desjejum << { name: 'Bebidas', options: bebidas.join(', ') }
+    desjejum << { name: 'Pães', options: paes.join(', ') }
+    desjejum << { name: 'Frutas', options: frutas.join(', ') }
+    desjejum << { name: 'Especial', options: especial.join(', ') }
 
-      row.xpath("td[position() > 1]/span").each_with_index do |opk, index|
-        with_restriction = opk.attributes['class'].value.include?('lactose') || opk.attributes['class'].value.include?('gluten')
+    options[:desjejum] = desjejum
 
-        options_key[index - 1] = "#{options_key[index - 1]} #{opk.xpath('text()').to_s.strip}" if with_restriction
-        options_key[index] = opk.xpath('text()').to_s unless with_restriction
-      end
+    principal       = rows.xpath("//table[contains(@class, 'almoco')]//td[contains(@class, 'principal')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    vegetariano     = rows.xpath("//table[contains(@class, 'almoco')]//td[contains(@class, 'vegetariano')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    salada          = rows.xpath("//table[contains(@class, 'almoco')]//td[contains(@class, 'salada')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    guarnicao       = rows.xpath("//table[contains(@class, 'almoco')]//td[contains(@class, 'guarnicao')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    acompanhamento  = rows.xpath("//table[contains(@class, 'almoco')]//td[contains(@class, 'acompanhamento')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    suco            = rows.xpath("//table[contains(@class, 'almoco')]//td[contains(@class, 'suco')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    sobremesa       = rows.xpath("//table[contains(@class, 'almoco')]//td[contains(@class, 'sobremesa')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
 
-      options[key] << {
-                        name: row.xpath("td[1]/span/text()").to_s,
-                        options: options_key.compact
-                      }
-    end
+    almoco = []
+    almoco << { name: 'Principal',      options: principal.join(', ') }
+    almoco << { name: 'Vegetariano',    options: vegetariano.join(', ') }
+    almoco << { name: 'Salada',         options: salada.join(', ') }
+    almoco << { name: 'Guarnição',      options: guarnicao.join(', ') }
+    almoco << { name: 'Acompanhamento', options: acompanhamento.join(', ') }
+    almoco << { name: 'Suco',           options: suco.join(', ') }
+    almoco << { name: 'Sobremesa',      options: sobremesa.join(', ') }
+
+    options[:almoco] = almoco
+
+    # jantar
+
+    principal       = rows.xpath("//table[contains(@class, 'jantar')]//td[contains(@class, 'principal')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    vegetariano     = rows.xpath("//table[contains(@class, 'jantar')]//td[contains(@class, 'vegetariano')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    salada          = rows.xpath("//table[contains(@class, 'jantar')]//td[contains(@class, 'salada')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    guarnicao       = rows.xpath("//table[contains(@class, 'jantar')]//td[contains(@class, 'guarnicao')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    acompanhamento  = rows.xpath("//table[contains(@class, 'jantar')]//td[contains(@class, 'acompanhamento')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    suco            = rows.xpath("//table[contains(@class, 'jantar')]//td[contains(@class, 'suco')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+    sobremesa       = rows.xpath("//table[contains(@class, 'jantar')]//td[contains(@class, 'sobremesa')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
+
+    jantar = []
+    jantar << { name: 'Principal',      options: principal.join(', ') }
+    jantar << { name: 'Vegetariano',    options: vegetariano.join(', ') }
+    jantar << { name: 'Salada',         options: salada.join(', ') }
+    jantar << { name: 'Guarnição',      options: guarnicao.join(', ') }
+    jantar << { name: 'Acompanhamento', options: acompanhamento.join(', ') }
+    jantar << { name: 'Suco',           options: suco.join(', ') }
+    jantar << { name: 'Sobremesa',      options: sobremesa.join(', ') }
+
+    options[:jantar] = jantar
+
+    # rows.map do |row|
+    #   # cada periodo tem uma tabela: Desjejum, Almoco, Jantar
+    #   # trata se o texto for "almoco"
+    #   if (h3 = row.xpath("td/h3/text()").to_s.downcase.gsub('ç', 'c')) != ''
+    #     key = h3.to_sym
+    #     next
+    #   end
+    #
+    #   options_key = []
+    #
+    #   row.xpath("td[position() > 1]/span").each_with_index do |opk, index|
+    #     with_restriction = opk.attributes['class'].value.include?('lactose') || opk.attributes['class'].value.include?('gluten')
+    #
+    #     options_key[index - 1] = "#{options_key[index - 1]} #{opk.xpath('text()').to_s.strip}" if with_restriction
+    #     options_key[index] = opk.xpath('text()').to_s unless with_restriction
+    #   end
+    #
+    #   options[key] << {
+    #                     name: row.xpath("td[1]/span/text()").to_s,
+    #                     options: options_key.compact
+    #                   }
+    # end
 
     options[daytime]
   end
