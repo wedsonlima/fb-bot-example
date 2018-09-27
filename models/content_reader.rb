@@ -31,10 +31,10 @@ class ContentReader
     especial  = rows.xpath("//table[contains(@class, 'desjejum')]//td[contains(@class, 'especial')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
 
     desjejum = []
-    desjejum << { name: 'Bebidas', options: bebidas.join(', ') }
-    desjejum << { name: 'Pães', options: paes.join(', ') }
-    desjejum << { name: 'Frutas', options: frutas.join(', ') }
-    desjejum << { name: 'Especial', options: especial.join(', ') }
+    desjejum << { name: 'Bebidas',  options: bebidas }
+    desjejum << { name: 'Pães',     options: paes }
+    desjejum << { name: 'Frutas',   options: frutas }
+    desjejum << { name: 'Especial', options: especial }
 
     options[:desjejum] = desjejum
 
@@ -47,13 +47,13 @@ class ContentReader
     sobremesa       = rows.xpath("//table[contains(@class, 'almoco')]//td[contains(@class, 'sobremesa')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
 
     almoco = []
-    almoco << { name: 'Principal',      options: principal.join(', ') }
-    almoco << { name: 'Vegetariano',    options: vegetariano.join(', ') }
-    almoco << { name: 'Salada',         options: salada.join(', ') }
-    almoco << { name: 'Guarnição',      options: guarnicao.join(', ') }
-    almoco << { name: 'Acompanhamento', options: acompanhamento.join(', ') }
-    almoco << { name: 'Suco',           options: suco.join(', ') }
-    almoco << { name: 'Sobremesa',      options: sobremesa.join(', ') }
+    almoco << { name: 'Principal',      options: principal }
+    almoco << { name: 'Vegetariano',    options: vegetariano }
+    almoco << { name: 'Salada',         options: salada }
+    almoco << { name: 'Guarnição',      options: guarnicao }
+    almoco << { name: 'Acompanhamento', options: acompanhamento }
+    almoco << { name: 'Suco',           options: suco }
+    almoco << { name: 'Sobremesa',      options: sobremesa }
 
     options[:almoco] = almoco
 
@@ -68,13 +68,13 @@ class ContentReader
     sobremesa       = rows.xpath("//table[contains(@class, 'jantar')]//td[contains(@class, 'sobremesa')]//span[contains(@class, 'desc')]/text()").map(&:to_s)
 
     jantar = []
-    jantar << { name: 'Principal',      options: principal.join(', ') }
-    jantar << { name: 'Vegetariano',    options: vegetariano.join(', ') }
-    jantar << { name: 'Salada',         options: salada.join(', ') }
-    jantar << { name: 'Guarnição',      options: guarnicao.join(', ') }
-    jantar << { name: 'Acompanhamento', options: acompanhamento.join(', ') }
-    jantar << { name: 'Suco',           options: suco.join(', ') }
-    jantar << { name: 'Sobremesa',      options: sobremesa.join(', ') }
+    jantar << { name: 'Principal',      options: principal }
+    jantar << { name: 'Vegetariano',    options: vegetariano }
+    jantar << { name: 'Salada',         options: salada }
+    jantar << { name: 'Guarnição',      options: guarnicao }
+    jantar << { name: 'Acompanhamento', options: acompanhamento }
+    jantar << { name: 'Suco',           options: suco }
+    jantar << { name: 'Sobremesa',      options: sobremesa }
 
     options[:jantar] = jantar
 
